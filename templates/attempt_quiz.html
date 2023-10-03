@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Attempt Quiz - {{ quiz.title }}{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h1>Attempt Quiz - {{ quiz.title }}</h1>
+        <p>{{ quiz.description }}</p>
+        
+        <!-- Add quiz questions and options here -->
+        <form method="post" action="{% url 'submit_quiz' quiz.id %}">
+            {% csrf_token %}
+            <!-- Loop through quiz questions and options -->
+            {% for question in quiz.quizquestion_set.all %}
+                <h3>{{ question.question_text }}</h3>
+                <input type="radio" name="answer_{{ question.id }}" value="1" id="option1_{{ question.id }}">
+                <label for="option1_{{ question.id }}">{{ question.option1 }}</label><br>
+                <input type="radio" name="answer_{{ question.id }}" value="2" id="option2_{{ question.id }}">
+                <label for="option2_{{ question.id }}">{{ question.option2 }}</label><br>
+                <input type="radio" name="answer_{{ question.id }}" value="3" id="option3_{{ question.id }}">
+                <label for="option3_{{ question.id }}">{{ question.option3 }}</label><br>
+                <input type="radio" name="answer_{{ question.id }}" value="4" id="option4_{{ question.id }}">
+                <label for="option4_{{ question.id }}">{{ question.option4 }}</label><br>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">Submit Quiz</button>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Quiz Results - {{ quiz.title }}{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h1>Quiz Results - {{ quiz.title }}</h1>
+        <p>{{ quiz.description }}</p>
+        <p>Total Questions: {{ total_questions }}</p>
+        <p>Correct Answers: {{ correct_answers }}</p>
+        <p>Score: {{ score }}%</p>
+
+        <!-- You can add more details or customization here, such as a message based on the score -->
+    </div>
+{% endblock %}
